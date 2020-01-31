@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { makeExecutableSchema } = require('graphql-tools');
+const cors = require("cors");
 const { typeDefs } = require("./typeDefs");
 const { resolvers } = require("./resolvers");
 const {
@@ -17,6 +18,8 @@ const schema = makeExecutableSchema({
 // Initialize the app
 const app = express();
 const PORT = 5000;
+
+app.use(cors());
 
 // The GraphQL endpoint
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
